@@ -7,8 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   // title = 'ahorcado';
-  palabra = 'PUTO';
+  palabra = 'PROGRAMADOR';
   palabraOculta = '';
+
+  intentos = 0;
+
+  gana = false;
+  pierde = false;
 
   letras = [
     'A',
@@ -45,6 +50,7 @@ export class AppComponent {
   }
 
   comprobar(unow) {
+    this.errorLetra(unow);
     const palabraOcultaArr = this.palabraOculta.split(' ');
     for (let i = 0; i < this.palabra.length; i++) {
       if (this.palabra[i] === unow) {
@@ -52,5 +58,28 @@ export class AppComponent {
       }
     }
     this.palabraOculta = palabraOcultaArr.join(' ');
+    this.ganaPierde();
+  }
+
+  ganaPierde() {
+    const palabraArr = this.palabraOculta.split(' ');
+    const palabraEvaluar = palabraArr.join('');
+
+    if (palabraEvaluar === this.palabra) {
+      this.gana = true;
+    }
+
+    if (this.intentos >= 9) {
+      this.pierde = true;
+    }
+  }
+
+  errorLetra(unow) {
+    if (this.palabra.indexOf(unow) >= 0) {
+      //encontro la letra
+      console.log('letra existe');
+    } else {
+      this.intentos++;
+    }
   }
 }

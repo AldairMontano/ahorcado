@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col text-center">
-    <img src="./assets/img/9.png" alt="ahorcado" class="ahorcado-img">
-    <h3>Intentos <small>3/9</small></h3>
+    <img src="./assets/img/{{ intentos }}.png" alt="ahorcado" class="ahorcado-img">
+    <h3>Intentos <small> {{ intentos }}/9</small></h3>
   </div>
 </div>
 
@@ -11,7 +11,22 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="gana">
+  <div class="col text-center">
+    <h1>Felicidades, Ganaste</h1>
+    <h3>:D</h3>
+  </div>
+</div>
+
+<div class="row" *ngIf="pierde">
+  <div class="col text-center">
+    <h1>Perdiste, jajaja</h1>
+    <h3>:P</h3>
+    <h4>{{ palabra }}</h4>
+  </div>
+</div>
+
+<div class="row" *ngIf="!gana && !pierde">
   <div class="col text-center">
     <button (click)="comprobar( unow )" *ngFor="let unow of letras" class="btn btn-primary">{{ unow }}</button>
   </div>
